@@ -1,9 +1,9 @@
 package main
 
 import (
-    // "log"
     "net/http"
     "fmt"
+    "os"
     // "io"
     // "encoding/json"
 )
@@ -12,7 +12,10 @@ func main() {
     fmt.Printf("Hello")
     http.HandleFunc("/", handler)
 
-    log.Fatal(http.ListenAndServe(":8080", nil))
+    err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+    if err != nil {
+      panic(err)
+    }
 }
 
 type Result struct {
