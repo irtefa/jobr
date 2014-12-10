@@ -1,14 +1,17 @@
 package main
 
 import (
-    "log"
+    // "log"
     "net/http"
-    "io"
-    "encoding/json"
+    "fmt"
+    // "io"
+    // "encoding/json"
 )
 
 func main() {
-    http.HandleFunc("/", HandleJSON)
+    fmt.Printf("Hello")
+    http.HandleFunc("/", handler)
+
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -16,8 +19,9 @@ type Result struct {
     Msg string `json:"msg"`
 }
 
-func HandleJSON(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Content-Type", "application/json")
-    result, _ := json.Marshal(Result{"hello Jobr"})
-    io.WriteString(w, string(result))
+func handler(w http.ResponseWriter, r *http.Request) {
+    // w.Header().Set("Content-Type", "application/json")
+    // result, _ := json.Marshal(Result{"hello Jobr"})
+    // io.WriteString(w, string(result))
+    fmt.Fprint(w, "Hello, world!")
 }
